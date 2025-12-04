@@ -1,0 +1,1365 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Ecentra</title>
+    <meta name="description" content="Welcome to Ecentra, where passion meets purpose in our quest to source the finest wellness, beauty, and life-enhancing products from around the globe."/>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="Ecentra">
+    <meta name="description" content="Ecentra">
+    <meta name='copyright' content='Ecentra'>
+    <meta name="viewport" content="width=device-width ,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- Favicon -->
+    <%--<link rel="icon" href="img/favicon.png">--%>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Nice Select CSS -->
+    <link rel="stylesheet" href="css/nice-select.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <!-- icofont CSS -->
+    <link rel="stylesheet" href="css/icofont.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" href="css/slicknav.min.css">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="css/owl-carousel.css">
+    <!-- Datepicker CSS -->
+    <link rel="stylesheet" href="css/datepicker.css">
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="css/animate.min.css">
+    <!-- Magnific Popup CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+
+    <!-- Medipro CSS -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/sweetalert.min.css" />
+
+    <style>
+        .header_border {
+            /*padding: 8px 15px;*/
+            margin: 8px 15px;
+            padding: 0px !important;
+        }
+
+        .header .nav li .dropdown {
+            top: 40px;
+        }
+
+        .footer .footer-top:before {
+            position: absolute;
+            content: "";
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background: #fff;
+            opacity: 1;
+            border-top: 1px solid #efefef;
+        }
+
+        .max-100 {
+            max-width: 100%;
+        }
+
+        .max-25 {
+            width: 25px;
+            margin: 10px;
+        }
+
+        .footer-icon {
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: space-around;
+            flex-direction: row;
+        }
+
+        .flex-end {
+            align-items: flex-end;
+        }
+
+        .f-600 {
+            font-weight: 600;
+        }
+
+
+        .f-300 {
+            font-weight: 300;
+        }
+
+        .cursor_pointer {
+            cursor: pointer;
+        }
+
+        /*.header_border:hover {
+            border-bottom:1px solid #efefef;
+        }*/
+
+        .membership_title {
+            font-size: 20px;
+            color: black;
+        }
+
+        .fw-200 {
+            font-weight: 200;
+        }
+
+        .fw-500 {
+            font-weight: 500;
+        }
+
+        .no_liststyle {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .active-menu {
+            font-weight: 600 !important;
+        }
+
+        .cart_no {
+            position: absolute;
+            top: -10%;
+            /*right: -4%;
+            right: 25%;
+            transform: translate(0%, 0%);*/
+            right: 0%;
+            transform: translate(-425%, 0%);
+            width: 15px;
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .inactive-color {
+            color: #b5b3b3 !important;
+        }
+
+        .div_desktop_header {
+            display: block;
+        }
+
+        .div_desktop_header_content {
+            display: block;
+        }
+
+        .div_mobile_header {
+            display: none;
+        }
+
+        .mobile_nav {
+            display: none;
+        }
+
+        .mobile_header {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+        .mobile_cart_no {
+            position: absolute;
+            /*top: 11.5%;*/
+            right: 10%;
+            transform: translate(-10%, -50%);
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .footer .footer-top {
+            padding: 50px 0px;
+        }
+
+        .d-inline-grid {
+            display: inline-grid;
+        }
+
+        .w-90 {
+            max-width: 90%;
+        }
+
+        .p-size {
+            font-size: 13px;
+        }
+
+        .f-500 {
+            font-weight: 500;
+        }
+
+        .cart_no_transparent {
+            position: absolute;
+            top: -10%;
+            right: 0%;
+            transform: translate(-425%, 0%);
+            width: 15px;
+            height: 15px;
+            line-height: 15px;
+            text-align: center;
+            border-radius: 50%;
+            background-color: #ffffff00;
+            color: white;
+            font-size: 9px;
+            font-weight: bold;
+        }
+
+        .div_company{
+            display:flex;
+            justify-content:space-between;
+        }
+
+        @media only screen and (max-width: 1024px) {
+            .div_company{
+                display:block;
+            }
+        }
+
+        @media only screen and (max-width: 767px) {
+
+            .div_contact {
+                display: inline-grid;
+            }
+
+            .mobile_logo {
+                width: 200px;
+            }
+
+            .div_desktop_header {
+                display: none !important;
+            }
+
+            .div_desktop_header_content {
+                display: none;
+            }
+
+            .div_mobile_header {
+                display: block;
+                margin: 0px;
+            }
+
+            /*========== VARIABLES CSS ==========*/
+            :root {
+                --header-height: 3.5rem;
+                --nav-width: 219px;
+                /*========== Colors ==========*/
+                --first-color: #6923D0;
+                --first-color-light: #F4F0FA;
+                --title-color: #19181B;
+                --text-color: #58555E;
+                --text-color-light: #A5A1AA;
+                --body-color: #F9F6FD;
+                --container-color: #FFFFFF;
+                /*========== Font and typography ==========*/
+                --body-font: 'Poppins', sans-serif;
+                --normal-font-size: .938rem;
+                --small-font-size: .75rem;
+                --smaller-font-size: .75rem;
+                /*========== Font weight ==========*/
+                --font-medium: 500;
+                --font-semi-bold: 600;
+                /*========== z index ==========*/
+                --z-fixed: 100;
+            }
+
+            /*========== BASE ==========*/
+            *, ::before, ::after {
+                box-sizing: border-box;
+            }
+
+            h3 {
+                margin: 0;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+
+            /*========== HEADER ==========*/
+            .header {
+                /*position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;*/
+                background-color: var(--container-color);
+                box-shadow: 0 1px 0 rgba(22, 8, 43, 0.1);
+                padding: 0 1rem;
+                z-index: var(--z-fixed);
+            }
+
+            .header__container {
+                display: flex;
+                align-items: center;
+                height: var(--header-height);
+                justify-content: space-between;
+            }
+
+            .header__img {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+            }
+
+            .header__logo {
+                color: var(--title-color);
+                font-weight: var(--font-medium);
+                display: none;
+            }
+
+            .header__search {
+                display: flex;
+                padding: .40rem .75rem;
+                background-color: var(--first-color-light);
+                border-radius: .25rem;
+            }
+
+            .header__input {
+                width: 100%;
+                border: none;
+                outline: none;
+                background-color: var(--first-color-light);
+            }
+
+                .header__input::placeholder {
+                    font-family: var(--body-font);
+                    color: var(--text-color);
+                }
+
+            .header__icon,
+            .header__toggle {
+                font-size: 1.2rem;
+            }
+
+            .header__toggle {
+                color: var(--title-color);
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                top: -5px;
+                background-color: #ececec82;
+                border-radius: 5px;
+                vertical-align: middle;
+                margin: auto 0;
+            }
+
+            .burger-menu {
+                font-size: 35px;
+                margin-top: 3px;
+                color: #adadad;
+            }
+
+            .header .topbar {
+                background-color: #fff;
+                border-bottom: 0px;
+            }
+
+            /*========== NAV ==========*/
+            .nav_mobile {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                height: 100vh;
+                padding: 2rem 1rem 0;
+                background-color: var(--container-color);
+                box-shadow: 1px 0 0 rgba(22, 8, 43, 0.1);
+                z-index: var(--z-fixed);
+                transition: .4s;
+            }
+
+            .nav__container {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding-bottom: 3rem;
+                overflow: auto;
+                scrollbar-width: none; /* For mozilla */
+            }
+
+                /* For Google Chrome and others */
+                .nav__container::-webkit-scrollbar {
+                    display: none;
+                }
+
+            .nav__logo {
+                font-weight: var(--font-semi-bold);
+                margin-bottom: 2.5rem;
+            }
+
+            .nav__list,
+            .nav__items {
+                display: grid;
+            }
+
+            .nav__list {
+                row-gap: 2.5rem;
+            }
+
+            .nav__items {
+                row-gap: 1.5rem;
+            }
+
+            .nav__subtitle {
+                font-size: var(--normal-font-size);
+                text-transform: uppercase;
+                letter-spacing: .1rem;
+                color: var(--text-color-light);
+            }
+
+            .nav__link {
+                display: flex;
+                align-items: center;
+                color: var(--text-color);
+            }
+
+                .nav__link:hover {
+                    color: var(--first-color);
+                }
+
+            .nav__icon {
+                font-size: 1.2rem;
+                margin-right: .5rem;
+            }
+
+            .nav__name {
+                font-size: var(--small-font-size);
+                font-weight: var(--font-medium);
+                white-space: nowrap;
+            }
+
+            .nav__logout {
+                /*margin-top: 5rem;*/
+                border: 1px solid #efefef;
+                border-radius: 3px;
+                background-color: #181717;
+                color: white;
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                padding: 2px 4px;
+            }
+
+            .nav_logout_icon {
+                transform: rotate(180deg);
+            }
+
+            /* Dropdown */
+            .nav__dropdown {
+                overflow: hidden;
+                max-height: 21px;
+                transition: .4s ease-in-out;
+            }
+
+            .nav__dropdown-collapse {
+                background-color: var(--first-color-light);
+                border-radius: .25rem;
+                margin-top: 1rem;
+            }
+
+            .nav__dropdown-content {
+                display: grid;
+                row-gap: .5rem;
+                padding: .75rem 2.5rem .75rem 1.8rem;
+                text-align: left;
+            }
+
+            .nav__dropdown-item {
+                font-size: var(--smaller-font-size);
+                font-weight: var(--font-medium);
+                color: var(--text-color);
+            }
+
+                .nav__dropdown-item:hover {
+                    color: var(--first-color);
+                }
+
+            .nav__dropdown-icon {
+                margin-left: auto;
+                transition: .4s;
+            }
+
+            /* Show dropdown collapse */
+            .nav__dropdown:hover {
+                max-height: 100rem;
+            }
+
+                /* Rotate icon arrow */
+                .nav__dropdown:hover .nav__dropdown-icon {
+                    transform: rotate(180deg);
+                }
+
+            /*===== Show menu =====*/
+            .show-menu {
+                left: 0;
+            }
+
+            /*===== Active link =====*/
+            .active {
+                color: var(--first-color);
+            }
+        }
+
+        @media only screen and (max-width: 375px) {
+
+            .mobile_logo {
+                width: 175px;
+            }
+        }
+
+        @media only screen and (max-width: 320px) {
+
+            .mobile_logo {
+                width: 150px;
+            }
+
+            .burger-menu {
+                font-size: 30px;
+                margin-top: 3px;
+                color: #adadad;
+            }
+
+            .nav_mobile {
+                padding: 1rem 0.5rem 0;
+            }
+        }
+    </style>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <div>
+
+            <!-- Preloader -->
+            <div class="preloader">
+                <div class="loader">
+                    <div class="loader-outter"></div>
+                    <div class="loader-inner"></div>
+                </div>
+            </div>
+            <!-- End Preloader -->
+
+            <!-- Get Pro Button -->
+            <%--<ul class="pro-features">
+                <a class="get-pro" href="#">Get Pro</a>
+                <li class="big-title">Pro Version Available on Themeforest</li>
+                <li class="title">Pro Version Features</li>
+                <li>2+ premade home pages</li>
+                <li>20+ html pages</li>
+                <li>Color Plate With 12+ Colors</li>
+                <li>Sticky Header / Sticky Filters</li>
+                <li>Working Contact Form With Google Map</li>
+                <div class="button">
+                    <a href="http://preview.themeforest.net/item/mediplus-medical-and-doctor-html-template/full_screen_preview/26665910?_ga=2.145092285.888558928.1591971968-344530658.1588061879" target="_blank" class="btn">Pro Version Demo</a>
+                    <a href="https://themeforest.net/item/mediplus-medical-and-doctor-html-template/26665910" target="_blank" class="btn">Buy Pro Version</a>
+                </div>
+            </ul>--%>
+
+            <!-- Header Area -->
+            <header class="header" runat="server" id="header">
+                <%--<!-- Topbar -->
+                <div class="topbar" style="padding: 15px 0px 10px 0px;">
+                    <div class="container" style="max-width: 100%;">
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div>
+                                    <a href="Home.aspx">
+                                        <img src="img/Logo/new_logo2.png" style="width:250px;"/></a>
+                                </div>
+                                <div style="position: absolute; right: 20px; top: 10px;">
+                                    <img src="img/Icon/user.png" style="width: 20px;" />
+                                    <div runat="server" id="div_login" style="display: inline-flex; justify-content: center; align-items: flex-end; flex-wrap: nowrap; flex-direction: row; position: relative; color: black;">
+                                        <a style="margin-right: 2rem; font-size: 13px;" href="Login.aspx">Login</a> <span style="color: #e1e1e1;">|</span> <a style="margin-left: 2rem; font-size: 13px;" href="ComingSoon.aspx">Sign Up</a>
+                                    </div>
+                                    <div runat="server" id="div_userdetails" style="display: inline-flex; justify-content: center; align-items: center; flex-wrap: nowrap; flex-direction: row; position: relative; color: black;">
+                                        <a style="font-size: 13px;" runat="server" id="lbl_username" href="MyProfile.aspx"></a>
+                                        <div class="cursor_pointer" onclick="Logout()"><img src="img/Icon/powerbutton.png" style="width: 15px; margin: 0px 5px; margin-top: -5px;" /></div>
+                                    </div>
+                                    <a>
+                                        <img src="img/Icon/cart.png" style="width: 20px;" /></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Topbar -->--%>
+                <!-- Header Inner -->
+                <div class="header-inner pb-0">
+                    <!-- Topbar -->
+                    <div class="topbar" style="padding: 10px 0px 10px 0px;">
+                        <div class="container" style="max-width: 100%; padding: 0px;">
+                            <div class="row div_desktop_header m-0">
+                                <div class="col-12 text-center">
+                                    <div>
+                                        <a href="#">
+                                            <img src="img/Logo/new_logo2.png" style="width: 250px;" /></a>
+                                    </div>
+                                    <div style="position: absolute; right: 20px; top: 10px;">
+                                        <img src="img/Icon/user.png" style="width: 20px;" />
+                                        <div runat="server" id="div_login" style="display: inline-flex; justify-content: center; align-items: flex-end; flex-wrap: nowrap; flex-direction: row; position: relative; color: black;">
+                                            <a style="margin-right: 1rem; font-size: 13px;" href="Login.aspx">Login</a> <span style="color: #e1e1e1;">|</span> <a style="margin-left: 1rem; font-size: 13px;" href="Login.aspx">Sign Up</a>
+                                        </div>
+                                        <div runat="server" id="div_userdetails" style="display: inline-flex; justify-content: center; align-items: center; flex-wrap: nowrap; flex-direction: row; position: relative; color: black;">
+                                            <a style="font-size: 13px;" runat="server" id="lbl_username" href="MyProfile.aspx"></a>
+                                            <div class="cursor_pointer" onclick="Logout()">
+                                                <img src="img/Icon/powerbuttonv2.png" style="width: 15px; margin: 0px 5px; margin-top: -5px;" />
+                                            </div>
+                                        </div>
+                                        <a onclick="GotoCheckout_Page()">
+                                            <img src="img/Icon/cart.png" style="width: 20px;" /></a>
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                <span runat="server" id="cartNo" visible="false"></span>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                        <div style="display: inline-flex; justify-content: center; align-items: center; flex-wrap: nowrap; flex-direction: row; position: relative; cursor: pointer; margin-left: 5px;">
+                                            <p class="f-400 f-black cursor-pointer" onclick="SetLanguage('English')">
+                                                EN &nbsp; 
+                                            </p>
+                                            <p>|</p>
+                                            <p class="f-400 f-black cursor-pointer" onclick="SetLanguage('Chinese')">
+                                                &nbsp; 中文
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row div_mobile_header">
+                                <div class="col-12 text-center">
+
+                                    <div class="mobile_header">
+                                        <div>
+                                            <a href="#">
+                                                <img src="img/Logo/new_logo2.png" class="mobile_logo" /></a>
+                                        </div>
+
+                                        <div style="position: absolute; right: 0;">
+                                            <i class='bx bx-menu burger-menu' id="header-toggle"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="nav_mobile" id="navbar">
+                                        <nav class="nav__container mt-3">
+                                            <div>
+                                                <div class="nav__list">
+                                                    <div class="nav__items my_shopping" style="min-width: 170px" runat="server" id="div_mobile_shopping">
+
+                                                        <div class="nav__link nav__logout" id="div_logout" onclick="Logout()">
+                                                            <i class='bx bx-log-out nav__icon nav_logout_icon'></i>
+                                                            <span class="nav__name" id="lbl_43">Log Out</span>
+                                                        </div>
+
+                                                        <a href="Home.aspx" class="nav__link active">
+                                                            <span class="nav__name" id="lbl_1">Home</span>
+                                                        </a>
+
+                                                        <a onclick="GotoCheckout_Page()" class="nav__link">
+                                                            <span class="nav__name" id="lbl_346">My Cart</span>
+                                                            <asp:UpdatePanel runat="server">
+                                                                <ContentTemplate>
+                                                                    <span runat="server" id="mobile_cart_2" class="mobile_cart_no"></span>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </a>
+
+                                                        <div class="nav__dropdown">
+                                                            <asp:LinkButton runat="server" CssClass="nav__link nav__name" OnClick="btn_Product_Click" ID="lbl_2">Product<i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i></asp:LinkButton>
+                                                        </div>
+
+                                                        <asp:LinkButton runat="server" CssClass="nav__link nav__name" OnClick="btn_Launch_Click" ID="lbl_3"><img style="width:90px; margin-left: -3px;" src="img/Logo/dermafirm_logo_v3.png" /></asp:LinkButton>
+
+                                                        <asp:LinkButton runat="server" CssClass="nav__link nav__name" OnClick="btn_My_Office_Click" ID="lbl_4">My Office</asp:LinkButton>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_339">Language</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="#" id="lbl_337" onclick="SetLanguage('English')">English</a>
+                                                                    <a class="nav__dropdown-item" href="#" id="lbl_338" onclick="SetLanguage('Chinese')">Chinese</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="nav__items my_office" runat="server" id="div_mobile_office">
+
+                                                        <div class="nav__link nav__logout" onclick="Logout()">
+                                                            <i class='bx bx-log-out nav__icon nav_logout_icon'></i>
+                                                            <span class="nav__name" id="lbl_336">Log Out</span>
+                                                        </div>
+
+                                                        <a href="Home.aspx" class="nav__link active">
+                                                            <span class="nav__name" id="lbl_5">Home</span>
+                                                        </a>
+
+                                                        <a onclick="GotoCheckout_Page()" class="nav__link">
+                                                            <span class="nav__name" id="lbl_248">My Cart</span>
+                                                            <asp:UpdatePanel runat="server">
+                                                                <ContentTemplate>
+                                                                    <span runat="server" id="mobile_cart" class="mobile_cart_no"></span>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </a>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_6">Registration</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="Register_Member.aspx?id=" id="lbl_7">Register New Member</a>
+                                                                    <a class="nav__dropdown-item" href="Direct_Referral_Listing.aspx" id="lbl_8">Direct Referral Listing</a>
+                                                                    <a class="nav__dropdown-item" href="Network_Tree.aspx?id=" id="lbl_9">Binary Tree View</a>
+                                                                    <a class="nav__dropdown-item" href="Assign_Member.aspx" id="lbl_10">Member Restructure</a>
+                                                                    <a class="nav__dropdown-item" href="Member_Placement_Setting.aspx" id="lbl_11">Auto-Placement Setting</a>
+                                                                    <a class="nav__dropdown-item" href="Activate_Account_Product_List.aspx" runat="server" id="lbl_341">Activate Account</a>
+                                                                    <a class="nav__dropdown-item" href="Register_Member_Open_New_Account.aspx?id=" runat="server" id="lbl_344">Open New Account</a>
+                                                                    <a class="nav__dropdown-item" href="Upgrade_To_BO_Product_List.aspx" runat="server" id="lbl_354" visible="false">Upgrade To BO</a>
+                                                                    <a class="nav__dropdown-item" href="#" runat="server" id="lbl_356" visible="false" data-toggle="modal" data-target="#Change_BO_Level_Modal">Upgrade To EO</a>
+                                                                    <a class="nav__dropdown-item" href="Register_A_Account.aspx?id=" runat="server" id="lbl_OpenA">Open A Account</a>
+                                                                    <a class="nav__dropdown-item" href="Register_B_Account.aspx?id=" runat="server" id="lbl_OpenB">Open B Account</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_12">Order</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="Product.aspx" id="lbl_13">Shop</a>
+                                                                    <a class="nav__dropdown-item" href="Redemption_Listing.aspx" style="display:none" id="lbl_465">Redemption</a>
+                                                                    <a class="nav__dropdown-item" href="Purchase_History.aspx" id="lbl_15">Purchase History</a>
+                                                                    <a class="nav__dropdown-item" href="Redemption_Order_History.aspx" style="display:none" id="lbl_467">Redemption Order History</a>
+                                                                    <a class="nav__dropdown-item" href="Registration_History.aspx" id="lbl_363">Registration History</a>
+                                                                    <a class="nav__dropdown-item" href="DC_History.aspx" id="lbl_16">DC History</a>
+                                                                    <a class="nav__dropdown-item" href="RP_History.aspx" style="display:none" id="lbl_449">RP History</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_18">Bonus</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="Wallet.aspx" id="lbl_19">Wallet</a>
+                                                                    <a class="nav__dropdown-item" href="Statement.aspx" id="lbl_20">Statement</a>
+                                                                    <a class="nav__dropdown-item" href="CP58_Listing.aspx" id="lbl_21">CP58 (Tax Statements)</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_22">My Profile</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="My_Info.aspx" id="lbl_23">My Info</a>
+                                                                    <a class="nav__dropdown-item" href="MyProfile.aspx" id="lbl_24">My Summary</a>
+                                                                    <a class="nav__dropdown-item" href="Change_Password.aspx" id="lbl_25">Change Password</a>
+                                                                    <a class="nav__dropdown-item" href="Membership_Card.aspx" id="lbl_26">eMembership Card</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_27">Support</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="Announcement.aspx" id="lbl_28">Announcement</a>
+                                                                    <a class="nav__dropdown-item" href="Event.aspx" id="lbl_29">Events & Activities</a>
+                                                                    <a class="nav__dropdown-item" href="ComingSoon.aspx" id="lbl_30">Compensation Plan</a>
+                                                                    <a class="nav__dropdown-item" href="Policy.aspx?id=1" id="lbl_31">Terms and Conditions</a>
+                                                                    <a class="nav__dropdown-item" href="Policy.aspx?id=2" id="lbl_32">Return & Refund Policy</a>
+                                                                    <a class="nav__dropdown-item" href="Form.aspx" id="lbl_33">Forms</a>
+                                                                    <a class="nav__dropdown-item" href="Policy.aspx?id=3" id="lbl_34">Privacy Policy</a>
+                                                                    <a class="nav__dropdown-item" href="Policy.aspx?id=10" id="lbl_997">Delivery Policy</a>
+                                                                    <a class="nav__dropdown-item" href="Policy.aspx?id=9" id="lbl_999">Contact Us</a>
+                                                                    <a class="nav__dropdown-item" href="FAQ.aspx" id="lbl_35">FAQ</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="Resources.aspx" class="nav__link">
+                                                                <span class="nav__name" id="lbl_36">Resources</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="nav__dropdown" runat="server" id="div_mobile_stockist" visible="false">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_361">POS System</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="Daily_Limit_Dashboard.aspx" id="lbl_369">POS Summary</a>
+                                                                    <%--<a class="nav__dropdown-item" href="Mobile_Stockist_Product_Listing.aspx" id="lbl_373">Shop</a>--%>
+                                                                    <a class="nav__dropdown-item" href="View_Order_Stockist.aspx" id="lbl_370">Sales Order Listing</a>
+                                                                    <a class="nav__dropdown-item" href="Register_Member_Stockist.aspx?id=" id="lbl_371">Recruit New Member</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="nav__dropdown">
+                                                            <a href="#" class="nav__link">
+                                                                <span class="nav__name" id="lbl_251">Language</span>
+                                                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                                                            </a>
+
+                                                            <div class="nav__dropdown-collapse">
+                                                                <div class="nav__dropdown-content">
+                                                                    <a class="nav__dropdown-item" href="#" id="lbl_249" onclick="SetLanguage('English')">English</a>
+                                                                    <a class="nav__dropdown-item" href="#" id="lbl_250" onclick="SetLanguage('Chinese')">Chinese</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- End Topbar -->
+                    <div class="container div_desktop_header_content">
+                        <div class="inner">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-12">
+                                    <!-- Shopping Menu -->
+                                    <div class="main-menu-shopping no_liststyle" runat="server" id="div_shopping_menu">
+                                        <nav class="navigation">
+                                            <ul class="nav menu no_liststyle">
+                                                <li class="no_liststyle"><a class="header_border" href="Home.aspx" id="lbl_44">Home</a></li>
+                                                <li class="no_liststyle">
+                                                    <asp:LinkButton runat="server" CssClass="header_border" ID="btn_Product" OnClick="btn_Product_Click">Product</asp:LinkButton></li>
+                                                <li class="no_liststyle">
+                                                    <asp:LinkButton runat="server" CssClass="header_border" Style="margin: 6px 15px;" ID="btn_Launch" OnClick="btn_Launch_Click"><img style="width:90px" src="img/Logo/dermafirm_logo_v3.png" /></asp:LinkButton></li>
+                                                <li class="no_liststyle">
+                                                    <asp:LinkButton runat="server" CssClass="header_border" ID="btn_My_Office" OnClick="btn_My_Office_Click">My Office</asp:LinkButton></li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <!--/ End Shopping Menu -->
+
+                                    <!-- My Office Menu -->
+                                    <div class="main-menu-office no_liststyle" runat="server" id="div_myoffice_menu">
+                                        <nav class="navigation">
+                                            <ul class="nav menu no_liststyle">
+                                                <li class="no_liststyle"><a class="header_border" href="Home.aspx" id="lbl_45">Home</a></li>
+                                                <li class="no_liststyle"><a class="header_border" href="#" id="lbl_46">Registration </a>
+                                                    <ul class="dropdown no_liststyle">
+                                                        <li class="no_liststyle"><a href="Register_Member.aspx?id=" id="lbl_47">Register New Member</a></li>
+                                                        <li class="no_liststyle"><a href="Direct_Referral_Listing.aspx" id="lbl_48">Direct Referral Listing</a></li>
+                                                        <li class="no_liststyle"><a href="Network_Tree.aspx?id=" id="lbl_49">Binary Tree View</a></li>
+                                                        <li class="no_liststyle"><a href="Assign_Member.aspx" id="lbl_50">Member Restructure</a></li>
+                                                        <li class="no_liststyle"><a href="Member_Placement_Setting.aspx" id="lbl_51">Auto-Placement Setting</a></li>
+                                                        <li class="no_liststyle" runat="server" id="li_activate_account"><a href="Activate_Account_Product_List.aspx" id="lbl_340">Activate Account</a></li>
+                                                        <li class="no_liststyle" runat="server" id="li_open_new_account"><a href="Register_Member_Open_New_Account.aspx?id=" id="lbl_345">Open New Account</a></li>
+                                                        <li class="no_liststyle" runat="server" id="li_upgrade_bo" visible="false"><a href="Upgrade_To_BO_Product_List.aspx" id="lbl_355">Upgrade To BO</a></li>
+                                                        <li class="no_liststyle" runat="server" id="li_upgrade_eo" visible="false" data-toggle="modal" data-target="#Change_BO_Level_Modal" ><a href="#" id="lbl_357">Upgrade To EO</a></li>
+                                                        <li class="no_liststyle"><a href="Register_A_Account.aspx?id=" id="lbl_OpenA">Open A Account</a></li>
+                                                        <li class="no_liststyle"><a href="Register_B_Account.aspx?id=" id="lbl_OpenB">Open B Account</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="no_liststyle"><a class="header_border" href="#" id="lbl_52">Order </a>
+                                                    <ul class="dropdown">
+                                                        <li class="no_liststyle"><a href="Product.aspx" id="lbl_53">Shop</a></li>
+                                                        <li class="no_liststyle" style="display:none"><a href="Redemption_Listing.aspx" id="lbl_466">Redemption</a></li>
+                                                        <li class="no_liststyle"><a href="Purchase_History.aspx" id="lbl_55">Purchase History</a></li>
+                                                        <li class="no_liststyle" style="display:none"><a href="Redemption_Order_History.aspx" id="lbl_477">Redemption Order History</a></li>
+                                                        <li class="no_liststyle"><a href="Registration_History.aspx" id="lbl_364">Registration History</a></li>
+                                                        <li class="no_liststyle"><a href="DC_History.aspx" id="lbl_56">DC History</a></li>
+                                                        <li class="no_liststyle" style="display:none"><a href="RP_History.aspx" id="lbl_450">RP History</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="no_liststyle"><a class="header_border" href="#" id="lbl_57">Bonus </a>
+                                                    <ul class="dropdown">
+                                                        <li class="no_liststyle"><a href="Wallet.aspx" id="lbl_58">Wallet</a></li>
+                                                        <li class="no_liststyle"><a href="Statement.aspx" id="lbl_59">Statement</a></li>
+                                                        <li class="no_liststyle"><a href="CP58_Listing.aspx" id="lbl_60">CP58 (Tax Statements)</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="no_liststyle"><a class="header_border" href="#" id="lbl_61">My Profile </a>
+                                                    <ul class="dropdown">
+                                                        <li class="no_liststyle"><a href="My_Info.aspx" id="lbl_62">My Info</a></li>
+                                                        <li class="no_liststyle"><a href="MyProfile.aspx" id="lbl_63">My Summary</a></li>
+                                                        <li class="no_liststyle"><a href="Change_Password.aspx" id="lbl_64">Change Password</a></li>
+                                                        <li class="no_liststyle"><a href="Membership_Card.aspx" id="lbl_65">eMembership Card</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="no_liststyle"><a class="header_border" href="#" id="lbl_74">Support </a>
+                                                    <ul class="dropdown">
+                                                        <li class="no_liststyle"><a href="Announcement.aspx" id="lbl_66">Announcement</a></li>
+                                                        <li class="no_liststyle"><a href="Event.aspx" id="lbl_67">Events & Activities</a></li>
+                                                        <li class="no_liststyle"><a href="ComingSoon.aspx" id="lbl_68">Compensation Plan</a></li>
+                                                        <li class="no_liststyle"><a href="Policy.aspx?id=1" id="lbl_69">Terms and Conditions</a></li>
+                                                        <li class="no_liststyle"><a href="Policy.aspx?id=2" id="lbl_70">Return & Refund Policy</a></li>
+                                                        <li class="no_liststyle"><a href="Form.aspx" id="lbl_71">Forms</a></li>
+                                                        <li class="no_liststyle"><a href="Policy.aspx?id=3" id="lbl_72">Privacy Policy</a></li>
+                                                        <li class="no_liststyle"><a href="Policy.aspx?id=10" id="lbl_996">Delivery Policy</a></li>
+                                                        <li class="no_liststyle"><a href="Policy.aspx?id=9" id="lbl_998">Contact Us</a></li>
+                                                        <li class="no_liststyle"><a href="FAQ.aspx" id="lbl_73">FAQ</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="no_liststyle"><a class="header_border" href="Resources.aspx" id="lbl_75">Resources </a></li>
+                                                <li class="no_liststyle" runat="server" id="li_mobile_stockist" visible="false"><a class="header_border" href="#" id="lbl_365">POS System </a>
+                                                    <ul class="dropdown">
+                                                        <li class="no_liststyle"><a href="Daily_Limit_Dashboard.aspx" id="lbl_366">POS Summary</a></li>
+                                                        <%--<li class="no_liststyle"><a href="Mobile_Stockist_Product_Listing.aspx" id="lbl_372">Shop</a></li>--%>
+                                                        <li class="no_liststyle"><a href="View_Order_Stockist.aspx" id="lbl_367">Sales Order Listing</a></li>
+                                                        <li class="no_liststyle"><a href="Register_Member_Stockist.aspx?id=" id="lbl_368">Recruit New Member</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <!--/ End My Office Menu -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--/ End Header Inner -->
+            </header>
+            <!-- End Header Area -->
+
+        <div class="modal fade" id="Change_BO_Level_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Upgrade To EO</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <asp:HiddenField runat="server" ID="hdn_change_bo_level_member_code" />
+
+                        <div class="row">
+                            <div class="card-body">
+                                    <div class="form-group row align-items-center" id="div_profit_center">
+                                        <label class="col-lg-5 col-xl-4 control-label text-lg-right mb-0">Profit Center <i style="color: red;">*</i></label>
+                                        <div class="col-lg-7 col-xl-7">
+                                            <asp:DropDownList runat="server" ID="ddl_profit_center" CssClass="form-control form-control-modern">
+                                            </asp:DropDownList>
+                                        </div>
+                                    </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-12">
+                                <asp:Button runat="server" Text="Confirm" class="btn btn-primary hidden" ID="btn_confirm_change_bo_level" OnClick="btn_confirm_change_bo_level_Click" />
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" onclick="Ask_Confirmation_Change_Level()">Confirm</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <!-- Footer Area -->
+            <footer runat="server" id="footer" class="footer bg-white">
+
+                <!-- Footer Top -->
+                <div class="Ddiv_desktop_footer footer-top bg-white">
+                    <div class="container w-90">
+                        <div class="row mb-4" style="border: 1px solid black;">
+                            <div class="col-lg-5 col-md-6 col-12 m-auto text-left d-inline-grid justify-content-center ">
+                                <img src="img/Background/Ecentra_login_logo_v2.png" style="width: 65%;" />
+                                <p class="f-300 p-size mt-3">E-12A-2, The Icon Tower (East Wing),</p>
+                                <p class="f-300 p-size">Level 12A, No.1, Jalan 1/ 68F, Jalan Tun Razak, 50400 K.L .</p>
+                                <p></p>
+                                <p class="f-300 p-size mt-2">Office Hours: Mon-Fri 10:00-17:00</p>
+                            </div>
+                            <div class="col-lg-7 col-md-5 col-12 div_contact mt-2 text-left">
+                                <span class="f-500">Customer Support</span>
+
+                                <p class="f-500 p-size mt-3">Email: <span class="f-300">cs@ecentra.com.my</span></p>
+                                <p class="f-500 p-size">Customer Service: : <span class="f-300">+603-2181 3118</span></p>
+                                <p class="f-500 p-size">WhatsApp Text : <span class="f-300">+018-766 1230</span></p>
+                                <p class="f-300 p-size mt-2">Mon-Fri 10:00-16:00 (Weekends & Public Holidays - Closed)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container max-100">
+
+                        <div class="row">
+                            <div class="col-12 text-left f-300 m-auto" style="border-bottom: 1px solid black">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container w-90">
+
+                        <div class="row mt-4">
+                            <div class="col-12 f-300 m-auto div_company">
+                                <p class="p-size text-left">copyright © <span id="currentYear"></span> ECENTRA SDN BHD. All rights reserved. (1514070-M) AJL 932466</p>
+                                <p class="p-size"><a href="https://nsisb.com/" target="_blank">Powered By <img src="img/Logo/nsi_logo.png" width="20px" height="20px" /> NSI SOLUTIONS SDN BHD</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <!--/ End Footer Top -->
+        </footer>
+            <!--/ End Footer Area -->
+
+        <script type="text/javascript">
+            document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+            document.addEventListener("DOMContentLoaded", function () {
+                var id = getCookieValue("userid");
+                if (id) {
+                    document.getElementById("ctl25").classList.add('cart_no');
+                } else {
+                    document.getElementById("div_logout").classList.add('hidden');
+                    document.getElementById("mobile_cart_2").classList.add('hidden');
+                    document.getElementById("ctl25").classList.add('cart_no_transparent');
+                }
+            });
+
+            function GotoCheckout_Page() {
+                var userid = getCookieValue("userid");
+                if (userid) {
+                    window.location.href = "Checkout.aspx?addressid=";
+                } else {
+                    window.location.href = "Login.aspx";
+                }
+            }
+
+            function SetLanguage(language) {
+                var expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + 30); // Set the expiration date to 30 days from now
+
+                // Convert the expiration date to a UTC string
+                var expires = "expires=" + expirationDate.toUTCString();
+
+                // Set the cookie with the expiration date
+                document.cookie = "language=" + language + ";" + expires;
+                window.location.reload();
+            }
+
+            function getCookieValue(cookieName) {
+                var name = cookieName + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var cookieArray = decodedCookie.split(";");
+
+                for (var i = 0; i < cookieArray.length; i++) {
+                    var cookie = cookieArray[i].trim();
+
+                    if (cookie.indexOf(name) === 0) {
+                        return cookie.substring(name.length, cookie.length);
+                    }
+                }
+
+                return "";
+            }
+
+            function loadlangsetting() {
+                var page = 'Master';
+                var language = 'English';
+                var cookies_language = getCookieValue("language");
+                if (cookies_language) {
+                    language = cookies_language;
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: "Language.asmx/Load_Language",
+                    async: false,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ page: page, language: language }),
+                    success: function (response) {
+                        var responseData = JSON.parse(response.d); // Parse the response JSON string
+                        responseData.forEach(function (item) {
+                            if (item.Label_Type === 'Label') {
+                                $('#' + item.Label_Name).text(item.Language_Content);
+                            } else if (item.Label_Type === 'Button') {
+                                var element = document.getElementById(item.Label_Name);
+                                if (element) {
+                                    element.innerText = item.Language_Content;
+                                }
+                            } else {
+                                window[item.Label_Name] = item.Language_Content;
+                            }
+                        });
+                    }
+                });
+            }
+
+            function Logout() {
+                const cookies = document.cookie.split(";");
+
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i];
+                    const eqPos = cookie.indexOf("=");
+                    const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                }
+
+                window.location.href = "Login.aspx";
+            }
+
+            /*==================== SHOW NAVBAR ====================*/
+            const showMenu = (headerToggle, navbarId) => {
+                const toggleBtn = document.getElementById(headerToggle),
+                    nav = document.getElementById(navbarId)
+
+                // Validate that variables exist
+                if (headerToggle && navbarId) {
+                    toggleBtn.addEventListener('click', () => {
+                        // We add the show-menu class to the div tag with the nav__menu class
+                        nav.classList.toggle('show-menu')
+                        // change icon
+                        toggleBtn.classList.toggle('bx-x')
+                    })
+                }
+            }
+
+            showMenu('header-toggle', 'navbar')
+
+            /*==================== LINK ACTIVE ====================*/
+            const linkColor = document.querySelectorAll('.nav__link')
+
+            function colorLink() {
+                linkColor.forEach(l => l.classList.remove('active'))
+                this.classList.add('active')
+            }
+
+            linkColor.forEach(l => l.addEventListener('click', colorLink))
+
+            //document.addEventListener("DOMContentLoaded", function () {
+            //    // Get the current page path without the leading "/"
+            //    var currentPagePath = window.location.pathname.substring(1);
+
+            //    // Get all menu links
+            //    var menuLinks = document.querySelectorAll('.main-menu a');
+
+            //    // Loop through each menu link and check if it matches the current page path
+            //    menuLinks.forEach(function (link) {
+            //        // Check if the link's href attribute matches the current page path
+            //        if (link.getAttribute('href') === currentPagePath) {
+            //            // Find the parent <li> element
+            //            var parentListItem = link.closest('li');
+
+            //            // If the parent <li> element exists, find its parent <li> and the header link
+            //            if (parentListItem) {
+            //                var grandparentListItem = parentListItem.parentElement.closest('li');
+            //                var headerLink = grandparentListItem ? grandparentListItem.querySelector('a.header_border') : null;
+
+            //                // If the header link exists, make it bold
+            //                if (headerLink) {
+            //                    headerLink.classList.add('active-menu');
+            //                } else {
+            //                    // If there is no header link, make the current link bold
+            //                    link.classList.add('active-menu');
+            //                }
+            //            }
+            //        }
+            //    });
+            //});
+
+            document.addEventListener("DOMContentLoaded", function () {
+                loadlangsetting();
+                // Get the current page path without the leading "/"
+                var currentPagePath = window.location.pathname.substring(1);
+                // Get the value of the "PageType" cookie
+                var pageType = getCookie("Page_Type");
+                // Check the value of the "PageType" cookie and modify the menu accordingly
+                if (currentPagePath === "ComingSoon.aspx") {
+
+                } else {
+                    if (pageType === "Shopping") {
+                        // Get all menu links
+                        var menuLinks = document.querySelectorAll('.main-menu-shopping a');
+
+                        // Loop through each menu link and check if it matches the current page path
+                        menuLinks.forEach(function (link) {
+                            // Check if the link's href attribute matches the current page path
+                            if (link.getAttribute('href') === currentPagePath) {
+                                // Find the parent <li> element
+                                var parentListItem = link.closest('li');
+
+                                // If the parent <li> element exists, find its parent <li> and the header link
+                                if (parentListItem) {
+                                    var grandparentListItem = parentListItem.parentElement.closest('li');
+                                    var headerLink = grandparentListItem ? grandparentListItem.querySelector('a.header_border') : null;
+
+                                    // If the header link exists, make it bold
+                                    if (headerLink) {
+                                        headerLink.classList.add('active-menu');
+                                    } else {
+                                        // If there is no header link, make the current link bold
+                                        link.classList.add('active-menu');
+                                    }
+                                }
+                            }
+                        });
+
+                    } else if (pageType === "MyOffice") {
+                        // Get all menu links
+                        var menuLinks = document.querySelectorAll('.main-menu-office a');
+
+                        // Loop through each menu link and check if it matches the current page path
+                        menuLinks.forEach(function (link) {
+                            // Check if the link's href attribute matches the current page path
+                            if (link.getAttribute('href').indexOf(currentPagePath) !== -1) {
+
+                                //if (link.getAttribute('href') === currentPagePath) {
+                                // Find the parent <li> element
+                                var parentListItem = link.closest('li');
+
+                                // If the parent <li> element exists, find its parent <li> and the header link
+                                if (parentListItem) {
+                                    var grandparentListItem = parentListItem.parentElement.closest('li');
+                                    var headerLink = grandparentListItem ? grandparentListItem.querySelector('a.header_border') : null;
+
+                                    // If the header link exists, make it bold
+                                    if (headerLink) {
+                                        headerLink.classList.add('active-menu');
+                                    } else {
+                                        // If there is no header link, make the current link bold
+                                        link.classList.add('active-menu');
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+            // Function to get cookie value by name
+            function getCookie(cookieName) {
+                var name = cookieName + "=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var cookieArray = decodedCookie.split(';');
+
+                for (var i = 0; i < cookieArray.length; i++) {
+                    var cookie = cookieArray[i].trim();
+                    if (cookie.indexOf(name) === 0) {
+                        return cookie.substring(name.length, cookie.length);
+                    }
+                }
+                return "";
+            }
+
+            function Ask_Confirmation_Change_Level() {
+                var confirmbutton = document.getElementById("btn_confirm_change_bo_level");
+                confirmbutton.click();
+            }
+        </script>
+
+        <!-- jquery Min JS -->
+        <script src="js/jquery.min.js"></script>
+        <!-- jquery Migrate JS -->
+        <script src="js/jquery-migrate-3.0.0.js"></script>
+        <!-- jquery Ui JS -->
+        <script src="js/jquery-ui.min.js"></script>
+        <!-- Easing JS -->
+        <script src="js/easing.js"></script>
+        <!-- Color JS -->
+        <script src="js/colors.js"></script>
+        <!-- Popper JS -->
+        <script src="js/popper.min.js"></script>
+        <!-- Bootstrap Datepicker JS -->
+        <script src="js/bootstrap-datepicker.js"></script>
+        <!-- Jquery Nav JS -->
+        <script src="js/jquery.nav.js"></script>
+        <!-- Slicknav JS -->
+        <script src="js/slicknav.min.js"></script>
+        <!-- ScrollUp JS -->
+        <script src="js/jquery.scrollUp.min.js"></script>
+        <!-- Niceselect JS -->
+        <script src="js/niceselect.js"></script>
+        <!-- Tilt Jquery JS -->
+        <script src="js/tilt.jquery.min.js"></script>
+        <!-- Owl Carousel JS -->
+        <script src="js/owl-carousel.js"></script>
+        <!-- counterup JS -->
+        <script src="js/jquery.counterup.min.js"></script>
+        <!-- Steller JS -->
+        <script src="js/steller.js"></script>
+        <!-- Wow JS -->
+        <script src="js/wow.min.js"></script>
+        <!-- Magnific Popup JS -->
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <!-- Counter Up CDN JS -->
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Main JS -->
+        <script src="js/main.js"></script>
+        <script src="js/sweetalert.min.js"></script>
+        </div>
+    </form>
+</body>
+</html>

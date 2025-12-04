@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36518.9 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Ecentra", ".", "{B40060B1-AFB4-39D1-3B9D-58EC16F0F9FC}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8.1"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_62042"
+		Debug.AspNetCompiler.PhysicalPath = "..\Ecentra\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62042\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_62042"
+		Release.AspNetCompiler.PhysicalPath = "..\Ecentra\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_62042\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "62042"
+		SlnRelativePath = "..\Ecentra\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B40060B1-AFB4-39D1-3B9D-58EC16F0F9FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B40060B1-AFB4-39D1-3B9D-58EC16F0F9FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {78B0C362-FB72-4F44-B46C-3B5614F5C1A3}
+	EndGlobalSection
+EndGlobal
