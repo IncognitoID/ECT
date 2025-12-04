@@ -1,0 +1,1 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Ipay88_Success_Redemption_Order.aspx.cs" Inherits="Ipay88_Success_Redemption_Order" %>

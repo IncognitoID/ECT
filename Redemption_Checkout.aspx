@@ -1,0 +1,1276 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Redemption_Checkout.aspx.cs" Inherits="Redemption_Checkout" MaintainScrollPositionOnPostback="true" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+    <style>
+        .title_bar {
+            background-color: #57585c;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .bg-black {
+            background-color: black !important;
+        }
+
+        .productlist{
+            display:table;
+            overflow-x:scroll;
+        }
+
+        .underline {
+            text-decoration: underline;
+        }
+
+        .package_style{
+            border: 1px solid #dad6d6;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .header-nav-menu {
+            /* add background styles here */
+            height: 36px;
+            background-size: 100%;
+            line-height: 36px;
+            margin-bottom: 10px;
+        }
+
+        .color-option {
+            display: inline-block;
+            cursor: pointer;
+            margin: 2px;
+        }
+
+            .color-option img {
+                width: 66px;
+                border: 2px solid transparent; /* Initial border style */
+            }
+
+        .selected {
+            border-color: #000; /* Change this to the color you want when selected */
+        }
+
+        input[type="radio"] {
+            width: 0px;
+        }
+
+        .variationstyle {
+            display: inline-block;
+            margin: 5px;
+            border: 1px solid rgba(0, 0, 0, .125);
+            border-top-width: 1px !important;
+            cursor: pointer;
+        }
+
+        label {
+            margin-bottom: 0px;
+        }
+
+        .notestyle {
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+
+        .product_price {
+            font-size: 15px;
+        }
+
+        .qty_box {
+            background-color: white;
+            color: black !important;
+            width: 60px;
+            height: 30px;
+            margin: 0;
+            padding: 0 !important;
+            border: 1px solid #000000 !important;
+            border-radius: 0px !important;
+        }
+
+        .plusminus {
+            background-color: white;
+            color: black;
+            width: 60px;
+            height: 30px;
+            margin: 0;
+            padding: 0;
+            border: 1px solid #000000;
+            border-radius: 0px;
+        }
+
+        .notecontent {
+            font-size: 14px;
+        }
+
+        .imgmask {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            opacity: 0.7;
+            text-align: center;
+            border: 1px solid #efefef;
+        }
+
+            .imgmask span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: inline-block;
+                font-size: 14px;
+                position: absolute;
+                background-color: white;
+                font-weight: bold;
+                color: #363535;
+                white-space: break-spaces;
+                /*white-space: nowrap;*/
+                line-height: 1.2;
+            }
+
+        .cart_note{
+            font-size:11px;
+        }
+
+        @media only screen and (max-width: 767px) {
+
+            .mobile_scroll_table {
+                overflow: auto;
+            }
+
+            .notestyle {
+                text-align: left;
+                font-size: 16px;
+            }
+
+            .notecontent {
+                font-size: 14px;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+
+            .product_price {
+                font-size: 13px;
+            }
+        }
+
+        @media only screen and (max-width: 300px) {
+
+            .notecontent {
+                font-size: 12px;
+            }
+
+            .qty_box {
+                background-color: white;
+                color: black !important;
+                width: 40px;
+                height: 30px;
+                margin: 0;
+                padding: 0 !important;
+                border: 1px solid #000000 !important;
+                border-radius: 0px !important;
+            }
+        }
+    </style>
+
+    <style>
+        #loadingOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(253 251 251 / 80%); /* semi-transparent background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999; /* Ensure it overlays other content */
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .spinnercolor {
+            color: #e03cce;
+            font-size: 60px;
+        }
+
+        .editaddress_size {
+            margin: 30px auto;
+            max-width: 50%;
+        }
+
+        .addaddress_size {
+            margin: 30px auto;
+            max-width: 55%;
+        }
+
+        .add_new_address {
+            border: 2px dashed red;
+            font-size: 1rem;
+            text-align: center;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fafafa;
+            cursor: pointer;
+        }
+
+        .defualtaddress {
+            border: 1px solid red;
+            padding: 4px 8px;
+            color: red;
+            font-weight: 400;
+        }
+
+        .addresstext {
+            color: #0000008a;
+            font-size: 15px;
+        }
+
+        .addressname_phone {
+            font-size: 18px;
+        }
+
+        .new_address_textbox {
+            padding: 10px !important;
+            margin: 10px 0px;
+        }
+
+        .nice-select {
+            height: 45px !important;
+        }
+
+        .editclass {
+            border: 1px solid #9b9bef;
+            padding: 3px 10px;
+            color: #08f;
+        }
+
+        .table td, .table th {
+            padding: .75rem;
+            vertical-align: middle;
+            border-top: 1px solid #e9ecef;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .d-grid {
+            display: grid !important;
+        }
+
+        .btn:hover {
+            background-color: #007bff; /* Change this to the desired hover color */
+            color: #ffffff; /* Change this to the desired text color on hover */
+        }
+
+        .normal_tr {
+            display: table-row !important;
+            margin: auto !important;
+            border: 0px !important;
+            border-top-width: 0px !important;
+            cursor: unset !important;
+        }
+
+        @media only screen and (max-width: 900px) {
+            .editaddress_size {
+                margin: 10px;
+                max-width: 100%;
+            }
+
+            .addaddress_size {
+                margin: 10px;
+                max-width: 100%;
+            }
+        }
+
+    </style>
+
+    <script type="text/javascript">
+        function Show_Variation() {
+            $('#productModal').modal('show');
+            $("tr").addClass("variationstyle");
+
+            // Get all <tr> elements within the table with class "productlist"
+            var rows = document.querySelectorAll('.table.productlist tr');
+
+            // Loop through each <tr> element and remove the class "variationstyle"
+            rows.forEach(function (row) {
+                row.classList.remove('variationstyle');
+            });
+
+            var rbtnlist_element = document.getElementById("ContentPlaceHolder1_rbtnlist_variation_value");
+
+            if (rbtnlist_element) {
+                var newrepeater = "ContentPlaceHolder1_rbtnlist_variation_value";
+                var table = document.getElementById(newrepeater);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 0, cell; cell = row.cells[j]; j++) {
+                        if (cell.firstChild.type == "radio") {
+                            if (cell.firstChild.checked) {
+                                row.style.border = "1px solid black";
+                                cell.style.color = "black";
+                            }
+                        }
+                    }
+                }
+            }
+
+            validateQuantity_Modal();
+        }
+
+        function Show_All_Address_Modal() {
+            $('#AllAddressModal').modal('show');
+        }
+
+        function Show_Edit_Address_Modal() {
+            $('#NewAddressModal').modal('show');
+        }
+
+        function OpenNewAddressModal() {
+            $('#NewAddressModal').modal('show');
+        }
+    </script>
+
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+
+    <section class="container mt-3">
+        <div class="row">
+            <div class="col-12 m-auto">
+                <div class="row text-left mb-3">
+                    <div class="col-12 d-inline-flex">
+                        <p class="membership_title fw-200" id="lbl_286"></p>
+                        &nbsp;<p class="membership_title fw-500" id="lbl_287"></p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-12 mb-3 mobile_scroll_table">
+                        <table class="table productlist w-100">
+                            <tr>
+                                <th><span id="lbl_288">Product</span></th>
+                                <th><span id="lbl_289">Name</span></th>
+                                <th><span id="lbl_290">Variation</span></th>
+                                <th><span id="lbl_462">RP Used</span></th>
+                                <th><span id="lbl_461">RP Qty</span></th>
+                                <th><span id="lbl_296">Weight (g)</span></th>
+                                <th><span id="lbl_463">Total RP Used</span></th>
+                                <th><span id="lbl_300">Edit</span></th>
+                            </tr>
+
+                            <asp:Repeater runat="server" ID="rpt_cart" OnItemDataBound="rpt_cart_ItemDataBound" OnItemCommand="rpt_cart_ItemCommand">
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>
+                                            <div style="position: relative; width: 120px;">
+                                                <img runat="server" id="img_product" />
+                                                <div runat="server" id="div_mask" class="imgmask" >
+                                                    <span id="lbl_mask_title" runat="server">NOT AVAILABLE</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lbl_product_name"></asp:Label></td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lbl_product_variation"></asp:Label></td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lbl_rp_used"></asp:Label></td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lbl_rp_qty"></asp:Label></td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lbl_total_weight"></asp:Label></td>
+                                        <td>
+                                            <asp:Label runat="server" ID="lbl_total_rp_amount"></asp:Label></td>
+                                        <td>
+                                            <div class="d-grid justify-content-around">
+                                                <asp:Button runat="server" ID="btn_edit" CssClass="btn" Text="Edit" Style="padding: 10px; width: 65px; margin-bottom: 10px;" CommandName="Edit" CommandArgument='<%# Eval("IDs") %>' formnovalidate />
+                                                <asp:Button runat="server" ID="btn_delete" CssClass="btn" Text="Delete" Style="padding: 10px; width: 65px;" CommandName="Delete" CommandArgument='<%# Eval("IDs") %>' formnovalidate />
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                            <tr runat="server" id="tr_no_record" visible="false" class="w-100 text-center">
+                                <td colspan="13">No record found.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <hr />
+                <div class="row">
+                    <!-- Column for desktop view -->
+                    <div class="col-lg-6 mb-3">
+                        <div>
+                            <div class="row">
+                                <div class="col-4 col-lg-4">
+                                    <label id="lbl_301"></label>
+                                </div>
+                                <div class="col-1 col-lg-1">
+                                    <span>:</span>
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <asp:Label runat="server" ID="lbl_total_qty">0</asp:Label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 col-lg-4">
+                                    <label id="lbl_464"></label>
+                                </div>
+                                <div class="col-1 col-lg-1">
+                                    <span>:</span>
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <asp:Label runat="server" ID="lbl_total_rp_used">0</asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column for desktop view -->
+                    <div class="col-lg-6 mb-3">
+                        <div>
+                            <div class="row">
+                                <div class="col-4 col-lg-4">
+                                    <label id="lbl_306"></label>
+                                </div>
+                                <div class="col-1 col-lg-1">
+                                    <span>:</span>
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <asp:Label runat="server" ID="lbl_total_shipping">RM 0.00</asp:Label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 col-lg-4">
+                                    <label id="lbl_307"></label>
+                                </div>
+                                <div class="col-1 col-lg-1">
+                                    <span>:</span>
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <asp:Label runat="server" ID="lbl_total_shipping_discount">RM 0.00</asp:Label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4 col-lg-4">
+                                    <label id="lbl_308"></label>
+                                </div>
+                                <div class="col-1 col-lg-1">
+                                    <span>:</span>
+                                </div>
+                                <div class="col-6 col-lg-6">
+                                    <asp:Label runat="server" ID="lbl_total_amout">RM 0.00</asp:Label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div id="div_customer_info" runat="server">
+                    <div class="row mb-4">
+                        <div class="col-12 mb-3 title_bar">
+                            <label id="lbl_309"></label>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_310"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-6 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_member_id"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_311"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-6 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_member_name"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_312"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-6 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_member_contact_no"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12 mb-3 title_bar">
+                            <label id="lbl_313"></label>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3 m-auto">
+                                        <label id="lbl_314"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1 m-auto">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8 m-auto">
+                                        <asp:DropDownList runat="server" ID="ddl_delivery_option" CssClass="w-100 new_address_textbox" OnSelectedIndexChanged="ddl_delivery_option_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" runat="server" id="div_delivery">
+                        <div class="col-12 mb-3 title_bar">
+                            <label id="lbl_315"></label>
+                        </div>
+
+                        <div class="col-12 mb-3 text-right">
+                            <asp:Button runat="server" ID="btn_edit_address" Text=" Edit Address" OnClick="btn_edit_address_Click" CssClass="btn bg-black text-white" formnovalidate />
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_316">Recipient Name</label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_delivery_name"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_326">Contact</label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_delivery_contact_no"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_317"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_delivery_address"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_318"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_delivery_postcode"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_319"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_delivery_city"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_320"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_delivery_state"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_344"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_delivery_country"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4" runat="server" id="div_self_pickup">
+                        <div class="col-12 mb-3 title_bar">
+                            <label id="lbl_321"></label>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_322"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_person_in_charge"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_323"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_person_in_charge_phone_number"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_324"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_pickup_address"></asp:Label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4 col-lg-3">
+                                        <label id="lbl_325"></label>
+                                    </div>
+                                    <div class="col-1 col-lg-1">
+                                        <span>:</span>
+                                    </div>
+                                    <div class="col-7 col-lg-8">
+                                        <asp:Label runat="server" ID="lbl_operation_time"></asp:Label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12 mb-3 title_bar">
+                            <label id="lbl_448"></label>
+                        </div>
+                        <div class="col-12">
+                            <div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-12">
+                                        <textarea runat="server" id="txt_remark" rows="4" class="form-control w-100" placeholder="Leave some remark here..." maxlength="200"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-12 col-lg-2 m-auto notestyle font-weight-bold">
+                            <label id="lbl_327"></label>
+                        </div>
+                        <div class="col-12 col-lg-10 mb-3 notecontent">
+                            <asp:Label runat="server" ID="lbl_checkout_note"></asp:Label>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="row mb-5">
+                        <div class="col-12 mb-3 text-right">
+                            <asp:Button runat="server" Text="Back" CssClass="btn btn_primary bg-black text-white" ID="btn_back" OnClick="btn_back_Click" formnovalidate />
+                            <asp:Button runat="server" Text="Place Order" CssClass="btn btn_primary bg-black text-white" ID="btn_place_order" OnClick="btn_place_order_Click" formnovalidate />
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div id="loadingOverlay" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <i class="fa fa-spinner fa-spin spinnercolor"></i>
+                        </div>
+                    </div>
+
+                    <asp:HiddenField runat="server" ID="hdn_item_code" />
+                    <asp:HiddenField runat="server" ID="hdn_cart_ids" />
+                    <asp:HiddenField runat="server" ID="hdn_rp_points" />
+                    <asp:HiddenField runat="server" ID="hdn_total_rp" />
+                    <asp:HiddenField runat="server" ID="hdn_total_quantity" />
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <span id="lbl_458"></span>&nbsp;<asp:Label runat="server" CssClass="font-weight-bold" ID="lbl_user_rp" Style="font-size: 14px;"></asp:Label>
+                        </div>
+                    </div>
+                    <div class="mb-4" runat="server" id="div_rp">
+                        <div class="row">
+                            <div class="col-6 m-auto">
+                                <span>RP :</span>&nbsp;<asp:Label runat="server" ID="lbl_rp" CssClass="product_price"></asp:Label>
+                            </div>
+                            <div class="col-6" style="display: flex; align-items: center">
+                                <button type="button" id="btn_rp_Dec" onclick="adjustAndValidateQuantity(this, 'decrease', 'txtQuantity3')" class="plusminus">-</button>
+                                <asp:TextBox ID="txtQuantity3" Text="0" onblur="adjustAndValidateQuantity(this, 'validate', 'txtQuantity3')" onkeypress="return isNumberKey(event)" CssClass="text-center qty_box" runat="server"></asp:TextBox>
+                                <button type="button" id="btn_rp_Inc" onclick="adjustAndValidateQuantity(this, 'increase', 'txtQuantity3')" class="plusminus">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-2 package_style" runat="server" id="div_package">
+                        <span id="lbl_330" class="underline"></span>
+                        <ul class="ml-3 mb-0">
+                            <asp:Repeater runat="server" ID="rpt_package_item" OnItemDataBound="rpt_package_item_ItemDataBound">
+                                <ItemTemplate>
+                                    <li>
+                                        <asp:Label runat="server" ID="lb_item_name"></asp:Label></li>
+                                </ItemTemplate>
+                            </asp:Repeater>
+                        </ul>
+                    </div>
+                    <div class="mb-2" runat="server" id="div_variation">
+                        <span id="lbl_278"></span>&nbsp;<asp:Label runat="server" ID="lbl_variation_name"></asp:Label>
+                        <asp:UpdatePanel runat="server">
+                            <ContentTemplate>
+                                <asp:RadioButtonList ID="rbtnlist_variation_value" runat="server" CssClass="variation-value-list" AutoPostBack="false"></asp:RadioButtonList>
+                            </ContentTemplate>
+                            <Triggers>
+                                <asp:AsyncPostBackTrigger ControlID="rbtnlist_variation_value" EventName="SelectedIndexChanged" />
+                            </Triggers>
+                        </asp:UpdatePanel>
+                    </div>
+                    <p class="mb-2">
+                        <div style="font-size: 14px;">
+                            <span id="lbl_279"></span>&nbsp;<asp:Label runat="server" ID="lbl_total_quantity"></asp:Label>
+                            <br />
+                            <span id="lbl_459"></span>&nbsp;<asp:Label runat="server" ID="lbl_rp_balance"></asp:Label>
+                            <div id="div_insufficient_rp_text" style="width: 55%; line-height: 1; display: none;">
+                                <span style="font-size: 11px; color: red;" id="lbl_460"></span>
+                            </div>
+                            <div id="div_no_qty" style="width: 100%; line-height: 1; display: none;">
+                                <span style="font-size: 11px; color: red;" id="lbl_283"></span>
+                            </div>
+                        </div>
+                    </p>
+                    <div class="d-flex justify-content-end">
+                        <asp:Button runat="server" ID="btn_final_update_cart" OnClick="btn_final_update_cart_Click" Style="display: none;" formnovalidate />
+                        <button type="button" id="btn_add_to_cart" onclick="UpdateCart()" style="color: white; background-color: #149474; border: 1px solid #149474; width: 30%; height: 30px;">Update Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="AllAddressModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+        <div class="modal-dialog editaddress_size" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">My Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="loadingOverlay" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <i class="fa fa-spinner fa-spin spinnercolor"></i>
+                        </div>
+                    </div>
+
+                    <div class="add_new_address" onclick="OpenNewAddressModal()" data-dismiss="modal">
+                        <asp:Label runat="server"> + Add New Address</asp:Label>
+                    </div>
+
+                    <div>
+                        <asp:Repeater runat="server" ID="rpt_address" OnItemDataBound="rpt_address_ItemDataBound" OnItemCommand="rpt_address_ItemCommand">
+                            <ItemTemplate>
+                                <div style="padding: 1rem 0px;">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <asp:Label runat="server" ID="lbl_receiver_name" CssClass="addressname_phone"></asp:Label><span style="color: #0000008a; padding: 0px 10px;">|</span><asp:Label runat="server" ID="lbl_receiver_phone" CssClass="addressname_phone"></asp:Label>
+                                        </div>
+                                        <div>
+                                            <asp:LinkButton runat="server" CssClass="editclass" ID="btn_edit" CommandName="Edit" CommandArgument='<%# Eval("id") %>' formnovalidate>Edit</asp:LinkButton>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <asp:Label runat="server" ID="lbl_receiver_address" CssClass="addresstext"></asp:Label>
+                                    </div>
+                                    <div class="addresstext mb-2">
+                                        <asp:Label runat="server" ID="lbl_receiver_postcode"></asp:Label><span>, </span>
+                                        <asp:Label runat="server" ID="lbl_receiver_city"></asp:Label><span>, </span>
+                                        <asp:Label runat="server" ID="lbl_receiver_state"></asp:Label><span>, </span>
+                                        <asp:Label runat="server" ID="lbl_receiver_country"></asp:Label>
+                                    </div>
+                                    <div runat="server" id="div_default">
+                                        <asp:Label runat="server" CssClass="defualtaddress">Default</asp:Label>
+                                    </div>
+                                </div>
+                                <hr />
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <div runat="server" id="div_norecord">
+                            <span>No Record</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="NewAddressModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog addaddress_size" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Address</h5>
+                </div>
+                <div class="modal-body">
+                    <div id="loadingOverlay" style="display: none;">
+                        <div class="spinner-border text-primary" role="status">
+                            <i class="fa fa-spinner fa-spin spinnercolor"></i>
+                        </div>
+                    </div>
+
+                    <asp:HiddenField runat="server" ID="hdn_ids" />
+                    <div class="row mt-2">
+                        <div class="col-6">
+                            <input type="text" runat="server" id="txt_full_name" class="w-100 new_address_textbox" placeholder="Full Name" required onkeypress="return lettersOnly(event)" onkeydown="handleEnterKeyPress(event, 'txt_phone_number')" />
+                        </div>
+                        <div class="col-6">
+                            <input type="text" runat="server" id="txt_phone_number" class="w-100 new_address_textbox" placeholder="Phone Number" required onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeydown="handleEnterKeyPress(event, 'txt_address_1')" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" runat="server" id="txt_address_1" class="w-100 new_address_textbox" placeholder="Address Line 1" required onkeydown="handleEnterKeyPress(event, 'txt_address_2')" />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <input type="text" runat="server" id="txt_address_2" class="w-100 new_address_textbox" placeholder="Address Line 2" onkeydown="handleEnterKeyPress(event, 'txt_postcode')" />
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-md-3 col-6">
+                            <input type="text" runat="server" id="txt_postcode" class="w-100 new_address_textbox" placeholder="Postcode" required onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeydown="handleEnterKeyPress(event, 'txt_city')" />
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <input type="text" runat="server" id="txt_city" class="w-100 new_address_textbox" placeholder="City" required onkeydown="handleEnterKeyPress(event, '<%= ddl_state.ClientID %>')" />
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <asp:DropDownList runat="server" ID="ddl_state" CssClass="w-100 new_address_textbox"></asp:DropDownList>
+                        </div>
+                        <div class="col-md-3 col-6">
+                            <asp:DropDownList runat="server" ID="ddl_country" CssClass="w-100 new_address_textbox"></asp:DropDownList>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <asp:CheckBox runat="server" ID="chk_default" Text="Set as default address" />
+                        </div>
+                    </div>
+
+                    <div class=" d-inline-flex float-right">
+                        <asp:Button runat="server" CssClass="form-control btn m-3" data-dismiss="modal" Text="Cancel" />
+                        <asp:Button runat="server" CssClass="form-control btn btn-primary m-3" ID="btn_submit" OnClick="btn_submit_Click" Text="Submit" />
+                        <asp:Button runat="server" CssClass="form-control btn btn-primary m-3" ID="btn_update" OnClick="btn_update_Click" Text="Update" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            Load_Language();
+            CheckFirstVariation();
+        });
+
+        function getCookieValue(cookieName) {
+            var name = cookieName + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var cookieArray = decodedCookie.split(";");
+
+            for (var i = 0; i < cookieArray.length; i++) {
+                var cookie = cookieArray[i].trim();
+
+                if (cookie.indexOf(name) === 0) {
+                    return cookie.substring(name.length, cookie.length);
+                }
+            }
+
+            return "";
+        }
+
+        function Load_Language() {
+            var page = 'Checkout';
+            var language = 'English';
+            var cookies_language = getCookieValue("language");
+            if (cookies_language) {
+                language = cookies_language;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "Language.asmx/Load_Language",
+                async: false,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ page: page, language: language }),
+                success: function (response) {
+                    var responseData = JSON.parse(response.d); // Parse the response JSON string
+                    responseData.forEach(function (item) {
+                        if (item.Label_Type === 'Label') {
+                            $('#' + item.Label_Name).text(item.Language_Content);
+                        } else if (item.Label_Type === 'Placeholder') {
+                            var element = document.getElementById(item.Label_Name);
+                            element.placeholder = item.Language_Content;
+                        } else if (item.Label_Type === 'Button') {
+                            var element = document.getElementById(item.Label_Name);
+                            if (element) {
+                                element.textContent = item.Language_Content;
+                            }
+                        } else if (item.Label_Type === 'LinkButton') {
+                            var element = document.getElementById('ContentPlaceHolder1_' + item.Label_Name);
+                            if (element) {
+                                element.value = item.Language_Content;
+                            }
+                        } else {
+                            window[item.Label_Name] = item.Language_Content;
+                        }
+                    });
+                }
+            });
+        }
+
+        function lettersOnly(event) {
+            var charCode = event.keyCode;
+
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode === 8 || charCode === 32) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function handleEnterKeyPress(event, nextElementId) {
+            if (event.keyCode === 13) {
+                event.preventDefault(); // Prevent default form submission behavior
+                document.getElementById(nextElementId).focus(); // Focus on the next input field
+            }
+        }
+
+        function sweetalert_success(message, messagetype) {
+            swal({
+                title: message,
+                type: "success"
+            });
+        }
+
+        function sweetalert_success_place_order(message, messagetype) {
+            swal({
+                title: message,
+                type: "success"
+            }, function () {
+                window.location = "Purchase_History.aspx";
+            });
+        }
+
+        function sweetalert_warning(message, messagetype) {
+            swal({
+                title: message,
+                icon: "warning",
+                button: "OK",
+            });
+        }
+
+        function CheckFirstVariation() {
+            // Check if any radio button is checked
+            var anyChecked = $(".variation-value-list input[type='radio']:checked").length > 0;
+
+            // If none are checked, check the last child
+            if (!anyChecked) {
+                $(".variation-value-list input[type='radio']").first().prop('checked', true).change();
+            }
+
+            var arrayvariation = [];
+
+            var newrepeater = "ContentPlaceHolder1_rbtnlist_variation_value";
+            var table = document.getElementById(newrepeater);
+            for (var i = 0, row; row = table.rows[i]; i++) {
+                for (var j = 0, cell; cell = row.cells[j]; j++) {
+                    if (cell.firstChild.type == "radio") {
+                        if (cell.firstChild.checked) {
+                            var selectedvalue = cell.firstChild.value; // Assuming the value you need is in the radio button itself
+                            row.style.border = "1px solid black";
+                            cell.style.color = "black";
+                            console.log(selectedvalue);
+                            arrayvariation.push(selectedvalue);
+                        } else {
+                            row.style.border = "1px solid rgba(0, 0, 0, .125)";
+                            cell.style.color = "#666";
+                        }
+                    }
+                }
+            }
+            var id = document.getElementById("ContentPlaceHolder1_hdn_item_code").value;
+            $.ajax({
+                type: "POST",
+                url: "Redemption_Checkout.aspx/ProcessArray",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: JSON.stringify({ myArray: arrayvariation, id: id }),
+                success: function (response) {
+                    var responseData = JSON.parse(response.d); // Parse the response JSON string
+                    for (var i = 0; i < responseData.variation_details.length; i++) {
+                        var variation_details = responseData.variation_details[i];
+
+                        document.getElementById("ContentPlaceHolder1_lbl_rp").innerText = numberWithCommas(parseFloat(variation_details.Variation_Product_RP_Points).toFixed(2));
+
+                    }
+                },
+                error: function (response) {
+                    console.log(response.responseText);
+                }
+            });
+
+            function numberWithCommas(x) {
+                return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+
+        }
+
+        function VariationSeleted() {
+            $("#loadingOverlay").show();
+            setTimeout(function () {
+
+                var arrayvariation = [];
+
+                var newrepeater = "ContentPlaceHolder1_rbtnlist_variation_value";
+                var table = document.getElementById(newrepeater);
+                for (var i = 0, row; row = table.rows[i]; i++) {
+                    for (var j = 0, cell; cell = row.cells[j]; j++) {
+                        if (cell.firstChild.type == "radio") {
+                            if (cell.firstChild.checked) {
+                                var selectedvalue = cell.firstChild.value; // Assuming the value you need is in the radio button itself
+                                row.style.border = "1px solid black";
+                                cell.style.color = "black";
+                                arrayvariation.push(selectedvalue);
+                            } else {
+                                row.style.border = "1px solid rgba(0, 0, 0, .125)";
+                                cell.style.color = "#666";
+                            }
+                        }
+                    }
+                }
+                var id = document.getElementById("ContentPlaceHolder1_hdn_item_code").value;
+                $.ajax({
+                    type: "POST",
+                    url: "Redemption_Checkout.aspx/ProcessArray",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: JSON.stringify({ myArray: arrayvariation, id: id }),
+                    success: function (response) {
+                        $("#loadingOverlay").hide();
+
+                        var responseData = JSON.parse(response.d); // Parse the response JSON string
+                        for (var i = 0; i < responseData.variation_details.length; i++) {
+                            var variation_details = responseData.variation_details[i];
+
+                            document.getElementById("ContentPlaceHolder1_lbl_rp").innerText = numberWithCommas(parseFloat(variation_details.Variation_Product_RP_Points).toFixed(2));
+
+                            document.getElementById("ContentPlaceHolder1_hdn_rp_points").value = variation_details.Variation_Product_RP_Points;
+                            var qty = "";
+                            qty = parseFloat(document.getElementById("ContentPlaceHolder1_txtQuantity3").value);
+                            document.getElementById("ContentPlaceHolder1_hdn_total_quantity").value = qty;
+                        }
+                        validateQuantity_Modal();
+                    },
+                    error: function (response) {
+                        $("#loadingOverlay").hide();
+                    }
+                });
+
+                function numberWithCommas(x) {
+                    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                }
+            }, 500); // 1000 milliseconds = 1 second
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        function onRadioButtonClick(radioButton) {
+            // Debugging: Log the class name of the clicked radio button
+            console.log("Clicked radio button class:", radioButton.className);
+
+            // Query for all radio buttons with the same class
+            var radioButtons = document.querySelectorAll(radioButton.className);
+
+            // Debugging: Log the number of radio buttons found
+            console.log("Number of radio buttons found:", radioButtons.length);
+
+            // Loop through the radio buttons and uncheck all except the clicked one
+            for (var i = 0; i < radioButtons.length; i++) {
+                if (radioButtons[i] !== radioButton) {
+                    radioButtons[i].checked = false;
+                }
+            }
+        }
+
+        function UpdateCart() {
+            var div_insufficient_rp_text = document.getElementById("div_insufficient_rp_text");
+            var div_no_qty = document.getElementById("div_no_qty");
+            var div_insufficient_Style = window.getComputedStyle(div_insufficient_rp_text);
+            var div_no_qty_style = window.getComputedStyle(div_no_qty);
+
+            if (div_no_qty_style.display === "block") {
+                // Do nothing, insufficient text is displayed
+            } else if (div_insufficient_Style.display === "block") {
+                // Do nothing, insufficient text is displayed
+            } else {
+                document.getElementById("ContentPlaceHolder1_btn_final_update_cart").click();
+            }
+        }
+
+        function adjustAndValidateQuantity(button, action, textboxId) {
+            var repeaterItem = button.parentNode;
+            var txtQuantity = repeaterItem.querySelector('[id$="' + textboxId + '"]');
+
+            if (txtQuantity) {
+                if (txtQuantity.value === '') {
+                    txtQuantity.value = 0;
+                }
+
+                var currentValue = parseInt(txtQuantity.value, 10);
+
+                // Determine the action to perform
+                if (action === 'increase') {
+                    currentValue++;
+                } else if (action === 'decrease') {
+                    if (currentValue > 0) {
+                        currentValue--;
+                    } else {
+                        currentValue = "0";
+                    }
+                }
+
+                // Update the textbox value
+                txtQuantity.value = currentValue;
+
+                // Validate the updated quantity
+                validateQuantity_Modal();
+            }
+        }
+
+        function validateQuantity_Modal() {
+            //Retail Price
+            var rp_point = "0";
+            //Retail Price
+
+            var rp_qty_element = document.getElementById("ContentPlaceHolder1_txtQuantity3");
+            var rp_qty = document.getElementById("ContentPlaceHolder1_txtQuantity3").value;
+            if (rp_qty_element) {
+                if (rp_qty != "0") {
+                    //Promotion Price
+                    var rp = document.getElementById("ContentPlaceHolder1_hdn_rp_points").value;
+                    var totalrp = document.getElementById("ContentPlaceHolder1_hdn_total_rp").value;
+                    rp_point = totalrp - (parseFloat(rp) * parseFloat(rp_qty));
+                    // Check if result_dc is negative and apply red color
+                    if (rp_point < 0) {
+                        document.getElementById("div_insufficient_rp_text").style.display = "block";
+                        document.getElementById("ContentPlaceHolder1_lbl_rp_balance").style.color = "red";
+                    } else if (rp_point === 0) {
+                        // Set the color to black if result_dc is 0
+                        document.getElementById("div_insufficient_rp_text").style.display = "none";
+                        document.getElementById("ContentPlaceHolder1_lbl_rp_balance").style.color = "black";
+                    } else {
+                        // Reset the color to its default value if needed
+                        document.getElementById("div_insufficient_rp_text").style.display = "none";
+                        document.getElementById("ContentPlaceHolder1_lbl_rp_balance").style.color = ""; // or use null or the original color value
+                    }
+                    //Promotion Price
+                } else {
+                    document.getElementById("div_insufficient_rp_text").style.display = "none";
+                    document.getElementById("ContentPlaceHolder1_lbl_rp_balance").style.color = "black";
+                }
+            }
+
+            var final_qty = "0";
+            final_qty = parseFloat(rp_qty);
+            document.getElementById("ContentPlaceHolder1_hdn_total_quantity").value = final_qty;
+            document.getElementById("ContentPlaceHolder1_lbl_total_quantity").innerText = final_qty;
+            var rp_balance = document.getElementById("ContentPlaceHolder1_lbl_rp_balance");
+
+            if (rp_balance) {
+                document.getElementById("ContentPlaceHolder1_lbl_rp_balance").innerText = parseFloat(rp_point).toLocaleString('en-US');
+            }
+
+            if (final_qty == "0") {
+                document.getElementById("div_no_qty").style.display = "block";
+            } else {
+                document.getElementById("div_no_qty").style.display = "none";
+            }
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+
+            // Allow only digits (0-9)
+            if (charCode < 48 || charCode > 57) {
+                return false;
+            }
+
+            return true;
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    </script>
+
+</asp:Content>
+
